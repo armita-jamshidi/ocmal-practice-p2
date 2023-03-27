@@ -1,6 +1,6 @@
 type student = {
-  string name;
-  mutable float gpa;
+  name: string;
+  mutable gpa: float;
 }
 
 let alice = {
