@@ -8,4 +8,4 @@ let alice = {
   gpa = 3.7;
 }
 
-alice.gpa <- 4.0
+alice.gpa <- 4.0;;
