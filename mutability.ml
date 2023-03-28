@@ -9,7 +9,7 @@ let alice = {
   gpa = 3.7;
 }
 
-alice.gpa <- 4.0;;
+(* alice.gpa <- 4.0;; *)
 
 (*refs*)
 (*creates a reference with contents [true]*)
@@ -41,11 +41,24 @@ x = z -> false
    RI: the array is non-empty*)
 type vector = float array
 
+(*norm with fold_left*)
 let norm vect_arr = 
   Array.fold_left (fun acc x-> acc +. (x*.x)) 0. vect_arr
 
-(*normalize*)
-let normalize vect_arr = 
+(*norm, using a loop*)
+let norm v = 
+  let acc = ref 0. in
+  for x=0 to Array.length v-1 do
+    acc := !acc +. ((v.(x)) *. v.(x))
+  done; !acc
+
+(*normalize using iter*)
+let normalize_iter v = 
+  let len = norm v in 
+  Array.iteri (fun i elem -> v.(i) <- (v).(i) /. len) v
+
+(*normalize using a loop*)
+let normalize_loop vect_arr = 
   let vec_len = norm vect_arr in
   for x=0 to Array.length vect_arr -1 do
     vect_arr.(x) <- (vect_arr.(x) /. vec_len)
